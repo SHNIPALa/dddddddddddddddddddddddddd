@@ -14,9 +14,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Конфигурация из переменных окружения
-API_ID = int(os.getenv("API_ID", "12345"))
-API_HASH = os.getenv("API_HASH", "your_api_hash")
-BOT_TOKEN = os.getenv("BOT_TOKEN", "your_bot_token")
+API_ID = int(os.getenv("2040", "2040"))
+API_HASH = os.getenv("b18441a1ff607e10a989891a5462e627", "b18441a1ff607e10a989891a5462e627")
+BOT_TOKEN = os.getenv("8726694308:AAF5_WwE1Tu9csG7ZKjwgG50n-1A5nByM4Q", "8726694308:AAF5_WwE1Tu9csG7ZKjwgG50n-1A5nByM4Q")
 
 # Настройки IceCast
 ICECAST_HOST = os.getenv("ICECAST_HOST", "localhost")
