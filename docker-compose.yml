@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  radio-bot:
+    build: .
+    container_name: radio-bot
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - API_ID=${API_ID}
+      - API_HASH=${API_HASH}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - ICECAST_HOST=localhost
+      - ICECAST_PORT=8000
+      - ICECAST_PASSWORD=hackme
+      - ICECAST_MOUNT=/radio.mp3
+      - PUBLIC_HOST=${PUBLIC_HOST:-localhost}
+      - PUBLIC_PORT=${PUBLIC_PORT:-8000}
+      - MUSIC_DIR=/app/music
+    volumes:
+      - ./music:/app/music  # Монтируем локальную папку
+    command: python -u bot.py
