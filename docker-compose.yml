@@ -1,17 +1,31 @@
 version: '3.8'
 
 services:
-  radio-bot:
-    build: .
-    container_name: radio-bot
+  icecast:
+    image: moul/icecast
+    container_name: radio-icecast
     restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
+      - ICECAST_SOURCE_PASSWORD=hackme
+      - ICECAST_ADMIN_PASSWORD=hackme
+      - ICECAST_PASSWORD=hackme
+      - ICECAST_RELAY_PASSWORD=hackme
+    networks:
+      - radio-net
+
+  bot:
+    build: .
+    container_name: radio-bot
+    restart: unless-stopped
+    depends_on:
+      - icecast
+    environment:
       - API_ID=${API_ID}
       - API_HASH=${API_HASH}
       - BOT_TOKEN=${BOT_TOKEN}
-      - ICECAST_HOST=localhost
+      - ICECAST_HOST=icecast  # Имя сервиса
       - ICECAST_PORT=8000
       - ICECAST_PASSWORD=hackme
       - ICECAST_MOUNT=/radio.mp3
@@ -19,5 +33,10 @@ services:
       - PUBLIC_PORT=${PUBLIC_PORT:-8000}
       - MUSIC_DIR=/app/music
     volumes:
-      - ./music:/app/music  # Монтируем локальную папку
-    command: python -u bot.py
+      - ./music:/app/music
+    networks:
+      - radio-net
+
+networks:
+  radio-net:
+    driver: bridge
