@@ -14,9 +14,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Конфигурация из переменных окружения
-API_ID = int(os.getenv("2040", "2040"))
-API_HASH = os.getenv("b18441a1ff607e10a989891a5462e627", "b18441a1ff607e10a989891a5462e627")
-BOT_TOKEN = os.getenv("8726694308:AAF5_WwE1Tu9csG7ZKjwgG50n-1A5nByM4Q", "8726694308:AAF5_WwE1Tu9csG7ZKjwgG50n-1A5nByM4Q")
+API_ID = int(os.getenv("API_ID", "12345"))
+API_HASH = os.getenv("API_HASH", "your_api_hash")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "your_bot_token")
 
 # Настройки IceCast
 ICECAST_HOST = os.getenv("ICECAST_HOST", "localhost")
@@ -42,9 +42,9 @@ STREAM_URL = f"http://{PUBLIC_HOST}:{PUBLIC_PORT}{ICECAST_MOUNT}"
 # Инициализация Pyrogram клиента
 app = Client(
     "radio_bot",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN
+    api_id=2040,
+    api_hash="b18441a1ff607e10a989891a5462e627",
+    bot_token="8726694308:AAF5_WwE1Tu9csG7ZKjwgG50n-1A5nByM4Q"
 )
 
 
